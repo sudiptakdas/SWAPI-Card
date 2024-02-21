@@ -1,40 +1,48 @@
 import React from 'react';
 
-const Pagination = () => {
-  return (
-    <>
-      <nav aria-label='Page navigation example'>
-        <ul className='inline-flex -space-x-px text-base h-10'>
-          <li>
-            <a
-              href='#'
-              className='flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-            >
-              Previous
-            </a>
-          </li>
+interface Props {
+  paginate: any;
+}
 
-          {Array.from({ length: 9 }, (_, index) => (
-            <li key={index}>
-              <a
-                href='#'
-                className='flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-              >
-                {index + 1}
-              </a>
-            </li>
-          ))}
-          <li>
+const Pagination: React.FC<Props> = ({ paginate }) => {
+  const pageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  return (
+    <nav aria-label='Page navigation example'>
+      <ul className='inline-flex -space-x-px text-base h-10'>
+        <li>
+          <a
+            href='#'
+            onClick={() => paginate((prev: number) => prev - 1)}
+            className='flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+          >
+            Previous
+          </a>
+        </li>
+
+        {pageNumbers?.map((number) => (
+          <li key={number}>
             <a
               href='#'
-              className='flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+              onClick={() => paginate(number)}
+              className='flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
             >
-              Next
+              {number}
             </a>
           </li>
-        </ul>
-      </nav>
-    </>
+        ))}
+
+        <li>
+          <a
+            href='#'
+            onClick={() => paginate((prev: number) => prev + 1)}
+            className='flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+          >
+            Next
+          </a>
+        </li>
+      </ul>
+    </nav>
   );
 };
 

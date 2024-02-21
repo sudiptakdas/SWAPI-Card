@@ -11,12 +11,18 @@ const Home: React.FC = () => {
   const [cardIndex, setCardIndex] = useState(null);
   const [image, setImage] = useState('');
   const [openCardModal, setOpenCardModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [charactersPerPage] = useState(9); // Change this value as needed
+
+  // Logic to get characters for current page
 
   useEffect(() => {
     const fetchCharacters = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://swapi.dev/api/people/');
+        const response = await fetch(
+          `https://swapi.dev/api/people/?page=${currentPage}`
+        );
         const data = await response.json();
         setCharacters(data.results);
         setLoading(false);
@@ -27,7 +33,7 @@ const Home: React.FC = () => {
     };
 
     fetchCharacters();
-  }, []);
+  }, [currentPage]);
 
   const openModal = (character: any) => {
     setSelectedCharacter(character);
@@ -37,7 +43,7 @@ const Home: React.FC = () => {
     <div className='App'>
       <h1 className=' font-bold text-4xl'>Star Wars Characters</h1>
       {loading && (
-        <div className=' bg-purple-600 flex items-center justify-center mt-6 w-full  rounded-lg dark:bg-gray-800 dark:border-gray-700'>
+        <div className=' flex items-center justify-center mt-6 w-full  rounded-lg dark:bg-gray-800 dark:border-gray-700'>
           <div role='status'>
             <svg
               aria-hidden='true'
@@ -60,8 +66,8 @@ const Home: React.FC = () => {
         </div>
       )}
       {error && <p>{error}</p>}
-      <div className='character-container p-8 grid grid-cols-3 gap-12'>
-        {characters.map((character: any, index: number) => (
+      <div className='character-container p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12'>
+        {characters?.map((character: any, index: number) => (
           <ImageCard
             key={index}
             title={character.name}
@@ -75,12 +81,14 @@ const Home: React.FC = () => {
         ))}
       </div>
       <div className=' mt-4'>
-        <Pagination />
+        <Pagination
+          paginate={(pageNumber: number) => setCurrentPage(pageNumber)}
+        />
       </div>
       {openCardModal && (
         <div className=' w-[200px] h-[200px]'>
           <Modal
-          image={image}
+            image={image}
             characterInfo={selectedCharacter}
             onClose={() => setOpenCardModal(false)}
           />
