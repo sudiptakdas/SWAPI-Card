@@ -9,6 +9,7 @@ const Home: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [cardIndex, setCardIndex] = useState(null);
+  const [image, setImage] = useState('');
   const [openCardModal, setOpenCardModal] = useState(false);
 
   useEffect(() => {
@@ -32,7 +33,6 @@ const Home: React.FC = () => {
     setSelectedCharacter(character);
   };
 
-  console.log(openCardModal, '@@@@@');
   return (
     <div className='App'>
       <h1 className=' font-bold text-4xl'>Star Wars Characters</h1>
@@ -69,6 +69,7 @@ const Home: React.FC = () => {
             onClick={() => {
               setOpenCardModal(true);
               openModal(character);
+              setImage(`https://picsum.photos/200?random=${index}`);
             }}
           />
         ))}
@@ -77,10 +78,13 @@ const Home: React.FC = () => {
         <Pagination />
       </div>
       {openCardModal && (
-        <Modal
-          characterInfo={selectedCharacter}
-          onClose={() => setOpenCardModal(false)}
-        />
+        <div className=' w-[200px] h-[200px]'>
+          <Modal
+          image={image}
+            characterInfo={selectedCharacter}
+            onClose={() => setOpenCardModal(false)}
+          />
+        </div>
       )}
     </div>
   );
