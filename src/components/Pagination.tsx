@@ -1,10 +1,11 @@
 import React from 'react';
 
 interface Props {
+  currentPage: number;
   paginate: any;
 }
 
-const Pagination: React.FC<Props> = ({ paginate }) => {
+const Pagination: React.FC<Props> = ({ currentPage, paginate }) => {
   const pageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
@@ -25,7 +26,9 @@ const Pagination: React.FC<Props> = ({ paginate }) => {
             <a
               href='#'
               onClick={() => paginate(number)}
-              className='flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+              className={`flex items-center justify-center px-4 h-10 leading-tight text-gray-500  border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
+                currentPage === number ? 'bg-blue-200' : 'bg-white'
+              }`}
             >
               {number}
             </a>

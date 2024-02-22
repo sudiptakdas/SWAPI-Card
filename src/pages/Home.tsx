@@ -8,11 +8,9 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
-  const [cardIndex, setCardIndex] = useState(null);
   const [image, setImage] = useState('');
   const [openCardModal, setOpenCardModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [charactersPerPage] = useState(9); // Change this value as needed
 
   // Logic to get characters for current page
 
@@ -82,6 +80,7 @@ const Home: React.FC = () => {
       </div>
       <div className=' mt-4'>
         <Pagination
+          currentPage={currentPage}
           paginate={(pageNumber: number) => setCurrentPage(pageNumber)}
         />
       </div>
