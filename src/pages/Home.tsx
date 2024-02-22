@@ -11,6 +11,7 @@ const Home: React.FC = () => {
   const [image, setImage] = useState('');
   const [openCardModal, setOpenCardModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Logic to get characters for current page
 
@@ -19,7 +20,7 @@ const Home: React.FC = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://swapi.dev/api/people/?page=${currentPage}`
+          `https://swapi.dev/api/people/?page=${currentPage}&search=${searchQuery}`
         );
         const data = await response.json();
         setCharacters(data.results);
@@ -31,15 +32,30 @@ const Home: React.FC = () => {
     };
 
     fetchCharacters();
-  }, [currentPage]);
+  }, [currentPage, searchQuery]);
 
   const openModal = (character: any) => {
     setSelectedCharacter(character);
   };
 
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
     <div className='App'>
-      <h1 className=' font-bold text-4xl'>Star Wars Characters</h1>
+      <h1 className=' font-bold text-4xl underline'>Star Wars Characters</h1>
+
+      <input
+        type='text'
+        placeholder='Search characters...'
+        value={searchQuery}
+        onChange={handleSearchInputChange}
+        className=' w-1/4 p-4 mt-10 border-2 border-gray-400 rounded-lg'
+      />
+
       {loading && (
         <div className=' flex items-center justify-center mt-6 w-full  rounded-lg dark:bg-gray-800 dark:border-gray-700'>
           <div role='status'>
