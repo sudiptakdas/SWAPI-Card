@@ -13,8 +13,6 @@ const Home: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Logic to get characters for current page
-
   useEffect(() => {
     const fetchCharacters = async () => {
       setLoading(true);
