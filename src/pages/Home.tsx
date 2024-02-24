@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import ImageCard from '../components/ImageCard';
 import Pagination from '../components/Pagination';
 import Modal from '../components/ModalComp';
-import Swapi from '../assets/Swapi.png';
 
 const Home: React.FC = () => {
   const [characters, setCharacters] = useState([]);

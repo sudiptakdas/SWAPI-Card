@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Swapi from './assets/Swapi.png';
 import Luke from './assets/Luke.jpeg';
 import JarJar from './assets/JarJar.jpeg';
 import Robot from './assets/Robot.jpeg';
@@ -8,7 +6,6 @@ import Ship from './assets/Ship.jpeg';
 import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <div className='relative h-screen bg-black flex justify-center items-center rounded-xl shadow-xl'>
