@@ -12,7 +12,7 @@ const ModalComp: React.FC<Props> = ({ image, characterInfo, onClose }) => {
       <Modal
         isOpen={true}
         contentLabel='Example Modal'
-        className='w-4/12 h-2/4 rounded-lg shadow-lg bg-blue-400 p-5 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 '
+        className='w-4/12 h-2/4 rounded-lg shadow-lg bg-gray-700 border-2 border-white p-5 absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 '
       >
         <div className=' flex flex-col sm:flex-row justify-between items-center'>
           <div className=' text-4xl text-gray-100'>{characterInfo.name}</div>

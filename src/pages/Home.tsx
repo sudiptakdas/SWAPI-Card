@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ImageCard from '../components/ImageCard';
 import Pagination from '../components/Pagination';
 import Modal from '../components/ModalComp';
+import Swapi from '../assets/Swapi.png';
 
 const Home: React.FC = () => {
   const [characters, setCharacters] = useState([]);
@@ -43,16 +44,19 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className='App'>
-      <h1 className=' font-bold text-4xl underline'>Star Wars Characters</h1>
-
-      <input
-        type='text'
-        placeholder='Search characters...'
-        value={searchQuery}
-        onChange={handleSearchInputChange}
-        className=' w-1/4 p-4 mt-10 border-2 border-gray-400 rounded-lg'
-      />
+    <div className='App bg-gray-800 border-2 flex flex-col   items-center border-black p-5 rounded-lg shadow-xl'>
+      <h1 className=' font-bold text-4xl underline text-white'>
+        Star Wars Characters
+      </h1>
+      <div className=' w-full'>
+        <input
+          type='text'
+          placeholder='Search characters...'
+          value={searchQuery}
+          onChange={handleSearchInputChange}
+          className=' w-1/4 p-4 mt-10 border-2 border-gray-400 rounded-lg'
+        />
+      </div>
 
       {loading && (
         <div className=' flex items-center justify-center mt-6 w-full  rounded-lg dark:bg-gray-800 dark:border-gray-700'>
@@ -74,30 +78,34 @@ const Home: React.FC = () => {
               />
             </svg>
           </div>
-          <span className=' text-3xl ml-2'>Loading...</span>
+          <span className=' text-3xl ml-2 text-white'>Loading...</span>
         </div>
       )}
       {error && <p>{error}</p>}
-      <div className='character-container p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12'>
-        {characters?.map((character: any, index: number) => (
-          <ImageCard
-            key={index}
-            title={character.name}
-            image={`https://picsum.photos/200?random=${index}`}
-            onClick={() => {
-              setOpenCardModal(true);
-              openModal(character);
-              setImage(`https://picsum.photos/200?random=${index}`);
-            }}
+      {!loading && (
+        <div className='character-container p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[115px] gap-y-12'>
+          {characters?.map((character: any, index: number) => (
+            <ImageCard
+              key={index}
+              title={character.name}
+              image={`https://picsum.photos/200?random=${index}`}
+              onClick={() => {
+                setOpenCardModal(true);
+                openModal(character);
+                setImage(`https://picsum.photos/200?random=${index}`);
+              }}
+            />
+          ))}
+        </div>
+      )}
+      {!loading && characters?.length > 0 && (
+        <div className=' mt-4'>
+          <Pagination
+            currentPage={currentPage}
+            paginate={(pageNumber: number) => setCurrentPage(pageNumber)}
           />
-        ))}
-      </div>
-      <div className=' mt-4'>
-        <Pagination
-          currentPage={currentPage}
-          paginate={(pageNumber: number) => setCurrentPage(pageNumber)}
-        />
-      </div>
+        </div>
+      )}
       {openCardModal && (
         <div className=' w-[200px] h-[200px]'>
           <Modal
