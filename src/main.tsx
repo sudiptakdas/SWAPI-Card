@@ -8,11 +8,11 @@ import Home from './pages/Home.tsx';
 
 const router = createBrowserRouter([
   {
-    path: '/starwar-card',
+    path: '/swapi-card',
     element: <App />,
   },
   {
-    path: '/starwar-card/home',
+    path: '/swapi-card/home',
     element: <Home />,
   },
   {

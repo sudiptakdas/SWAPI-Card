@@ -7,7 +7,7 @@ const ErrorPage: React.FC = () => {
     <div className=' flex flex-col  items-center justify-center p-10'>
       <h1>Oops! Error has happen, please navigate to home page</h1>
       <Link
-        to='/starwar-card/home'
+        to='/swapi-card/home'
         className=' underline text-blue-400 font-semibold text-xl hover:scale-110'
       >
         Home
