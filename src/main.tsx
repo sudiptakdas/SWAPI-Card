@@ -8,11 +8,11 @@ import Home from './pages/Home.tsx';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/SWAPI-Card/',
     element: <App />,
   },
   {
-    path: '/home',
+    path: 'SWAPI-Card/home',
     element: <Home />,
   },
   {
