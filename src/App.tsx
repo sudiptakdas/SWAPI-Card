@@ -17,7 +17,7 @@ function App() {
           Explore the galaxy and discover fascinating characters.
         </p>
         <Link
-          to='/swapi-card/home'
+          to='/swapi-cards/home'
           className='inline-block px-6 py-3 bg-blue-500 text-white font-semibold text-xl rounded-full shadow-md hover:bg-blue-600 hover:scale-110 transition duration-300 ease-in-out animate-pulse'
         >
           Enter the Galaxy
